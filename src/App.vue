@@ -8,7 +8,10 @@ export default {
   data() {
     return {
       search: '',
-      response: {}
+      response: {
+        films: [],
+        series: []
+      }
     }
   },
   components: {
@@ -19,13 +22,24 @@ export default {
     getSearchedFilm(inputValue) {
       this.search = inputValue;
       this.searchFilmByName();
+      this.searchSeriesByName();
     },
     async searchFilmByName() {
       if (!this.search !== '') {
         let params = {
           query: this.search
         };
-        this.response = await apiServices.get(API_URLS.SEARCH_MOVIES, params);
+        const response = await apiServices.get(API_URLS.SEARCH_MOVIES, params);
+        this.response.films = response.results;
+      }
+    },
+    async searchSeriesByName() {
+      if (!this.search !== '') {
+        let params = {
+          query: this.search
+        };
+        const response = await apiServices.get(API_URLS.SEARCH_TV, params);
+        this.response.series = response.results;
       }
     }
   }

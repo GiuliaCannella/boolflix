@@ -15,7 +15,7 @@ export default {
         <div class="col-12 bg-dark container-header">
             <div class="row d-flex align-items-center">
                 <div class="col-8">
-                    <h1 class="text-danger">BOOLFLIX</h1>
+                    <h1 class="text-danger ms-2">BOOLFLIX</h1>
                 </div>
                 <div class="col-4 d-flex">
                     <input type="text" v-model="searchText" class="form-control" placeholder="Cerca..">
