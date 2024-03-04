@@ -1,21 +1,17 @@
 <script>
-import { API_URLS } from '../services/apiUrls';
+import Card from './Card.vue';
 export default {
     data() {
         return {
         }
     },
+    components: {
+        Card
+    },
     props: {
         searchedFilmMain: Object
     },
     methods: {
-        getImageUrl(posterPath) {
-            if (posterPath != null) {
-                const baseUrl = API_URLS.BASE_IMAGE_URL;
-                const imageSize = 'w342';
-                return `${baseUrl}${imageSize}${posterPath}`;
-            }
-        },
     },
 }
 </script>
@@ -24,19 +20,16 @@ export default {
 <template>
     <div class="container">
         <h2>Serie Tv</h2>
-        <div class="card-serie border" v-for="serie in searchedFilmMain.series">
-            <p>{{ serie.name }}</p>
-            <p>{{ serie.original_name }}</p>
-            <p>{{ serie.original_language }}</p>
-            <p>{{ serie.vote_average }}</p>
-            <img :src="getImageUrl(serie.poster_path)" alt="">
+        <div class="container-card w-100 d-flex flex-wrap">
+            <Card v-for="serie in searchedFilmMain.series" class="card-boolflix" :title="serie.name"
+                :original-title="serie.original_name" :language="serie.original_language" :vote="serie.vote_average"
+                :img-url="serie.poster_path" />
         </div>
         <h2>Film</h2>
-        <div class="card-film border" v-for="film in searchedFilmMain.films">
-            <p>{{ film.title }}</p>
-            <p>{{ film.original_title }}</p>
-            <p>{{ film.original_language }}</p>
-            <p>{{ film.vote_average }}</p>
+        <div class="container-card w-100 d-flex flex-wrap">
+            <Card v-for="film in searchedFilmMain.films" class="card-boolflix" :title="film.title"
+                :original-title="film.original_title" :language="film.original_language" :vote="film.vote_average"
+                :img-url="film.poster_path" />
         </div>
     </div>
 </template>
