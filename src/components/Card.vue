@@ -20,6 +20,7 @@ export default {
                 const imageSize = 'w342';
                 return `${baseUrl}${imageSize}${posterPath}`;
             }
+            return '/src/assets/img/default.png';
         },
         hasLanguage(language) {
             if (language != null && language != '') {
@@ -46,7 +47,8 @@ export default {
             <p><span class="fw-bold">Lingua</span>: <img class="language" v-if="hasLanguage(language)"
                     :src="`/src/assets/img/${language}.png`" alt=""></p>
             <p><span class="fw-bold">Voto</span>:
-                <FontAwesomeIcon v-for="(numero, index) in numeroStelle" :class="starActive(index)" icon="fas fa-star" />
+                <FontAwesomeIcon v-for="(numero, index) in numeroStelle" :class="starActive(index)"
+                    icon="fas fa-star" />
             </p>
         </div>
     </div>
