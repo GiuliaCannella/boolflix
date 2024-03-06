@@ -1,40 +1,38 @@
 <script>
-
 export default {
     data() {
         return {
-            search: ''
+            searchText: ''
         }
     },
-    methods: {
-
-    },
-    emits: [
-        'ricerca'
-    ]
+    emits: ['searchFilmHeader'],
 }
 </script>
 
 
 <template>
-    <div class="row bg-dark">
-        <div class="col-12 ">
-            <div class="row">
-                <div class="col-8 d-flex align-items-center ">
-                    <h1 class="text-danger">Boolflix</h1>
+    <div class="row">
+        <div class="col-12 bg-dark container-header">
+            <div class="row d-flex align-items-center">
+                <div class="col-8">
+                    <h1 class="text-danger ms-2">BOOLFLIX</h1>
                 </div>
-                <div class="col-4 d-flex align-items-center ">
-                    <input type="text" v-model="search" class="form-control" placeholder="Cerca..">
-                    <button @click="$emit('ricerca', search)" type="button" class="btn btn-danger ms-3">Cerca</button>
+                <div class="col-4 d-flex">
+                    <input type="text" v-model="searchText" class="form-control" placeholder="Cerca..">
+                    <button @click="$emit('searchFilmHeader', searchText)" type="button"
+                        class="btn btn-danger ms-3">Cerca</button>
                 </div>
             </div>
+
         </div>
+
     </div>
-
-
-
 </template>
 
 
 
-<style lang="scss"></style>
+<style lang="scss">
+.container-header {
+    padding: 1em 3em;
+}
+</style>

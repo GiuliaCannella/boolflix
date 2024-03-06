@@ -5,51 +5,57 @@ import { API_URLS } from './services/apiUrls';
 import apiServices from './services/apiService';
 
 export default {
+  data() {
+    return {
+      search: '',
+      response: {
+        films: [],
+        series: []
+      }
+    }
+  },
   components: {
     Header,
     Main
   },
-  data() {
-    return {
-      search: '',
-      films: [],
-      series: []
-    }
-  },
   methods: {
-    ricercaFilm(inputValue) {
+    getSearchedFilm(inputValue) {
       this.search = inputValue;
-      this.getFilm();
-      this.getSerie();
+      this.searchFilmByName();
+      this.searchSeriesByName();
     },
-    async getFilm() {
-      let params = {
-        query: this.search,
+    async searchFilmByName() {
+      if (!this.search !== '') {
+        let params = {
+          query: this.search
+        };
+        const response = await apiServices.get(API_URLS.SEARCH_MOVIES, params);
+        this.response.films = response.results;
       }
-      const response = await apiServices.get(API_URLS.SEARCH_MOVIES, params);
-      this.films = response.results;
-
-
     },
-    async getSerie() {
-      let params = {
-        query: this.search,
+    async searchSeriesByName() {
+      if (!this.search !== '') {
+        let params = {
+          query: this.search
+        };
+        const response = await apiServices.get(API_URLS.SEARCH_TV, params);
+        this.response.series = response.results;
       }
-      const response = await apiServices.get(API_URLS.SEARCH_TV, params);
-      this.series = response.results;
     }
   }
 }
 </script>
 
+
 <template>
-
+  <!-- <FontAwesomeIcon icon="fas fa-bolt-lightning" /> -->
   <div class="container-fluid">
-    <Header @ricerca="ricercaFilm($event)" />
-    <Main :films="films" />
-
+    <Header @searchFilmHeader="getSearchedFilm($event)" />
+    <Main :searchedFilmMain="response" />
   </div>
 </template>
+
+
 
 <style lang="scss">
 @use './assets/scss/style.scss'
